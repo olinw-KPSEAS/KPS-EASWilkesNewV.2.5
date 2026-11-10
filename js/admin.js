@@ -1,5 +1,6 @@
 /**
  * KPSEAS Wilkes – Admin Console (Network version)
+ * Also plays the alert audio for the admin when sending
  */
 
 const ADMIN_PIN = '1111';
@@ -11,6 +12,7 @@ const pinSubmit = document.getElementById('pin-submit');
 const pinError = document.getElementById('pin-error');
 const sendBtn = document.getElementById('send-btn');
 const alertLog = document.getElementById('alert-log');
+const adminAudio = document.getElementById('admin-alert-audio');
 
 let isUnlocked = false;
 
@@ -57,6 +59,10 @@ function initSocket() {
       addToLog(data.alert);
       sendBtn.textContent = '✓ ALERT SENT';
       sendBtn.disabled = true;
+
+      // Play the same alert audio for the admin
+      playAdminAudio(data.alert.audioPath);
+
       setTimeout(() => {
         sendBtn.textContent = '🚨 SEND ALERT';
         sendBtn.disabled = false;
@@ -67,6 +73,19 @@ function initSocket() {
   s.on('error', (err) => {
     alert(err.message || 'Error sending alert');
   });
+}
+
+function playAdminAudio(path) {
+  if (!adminAudio) return;
+  adminAudio.pause();
+  adminAudio.currentTime = 0;
+  adminAudio.src = path;
+  const playPromise = adminAudio.play();
+  if (playPromise !== undefined) {
+    playPromise.catch((err) => {
+      console.warn('Admin audio playback failed:', path, err);
+    });
+  }
 }
 
 // ----- Send Alert -----

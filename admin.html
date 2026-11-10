@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Console – KPSEAS Wilkes</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="admin-page">
+  <div class="container">
+    <!-- PIN Gate -->
+    <div id="pin-gate" class="pin-gate">
+      <div class="pin-box">
+        <h2>Admin Access</h2>
+        <p>Enter Front Office PIN</p>
+        <input type="password" id="pin-input" maxlength="8" placeholder="••••" autocomplete="off" />
+        <button id="pin-submit">Unlock</button>
+        <p id="pin-error" class="error hidden">Incorrect PIN</p>
+        <a href="index.html" class="back-link">← Back</a>
+      </div>
+    </div>
+
+    <!-- Main Admin Console (hidden until PIN) -->
+    <div id="admin-console" class="hidden">
+      <header class="admin-header">
+        <div>
+          <div class="logo">KPSEAS</div>
+          <h1>Wilkes Emergency Alerting System</h1>
+        </div>
+        <div class="header-actions">
+          <span class="status-badge online">● System Online</span>
+          <a href="index.html" class="btn-secondary">Exit</a>
+        </div>
+      </header>
+
+      <main class="admin-main">
+        <section class="panel send-panel">
+          <h2>Send Alert</h2>
+
+          <div class="form-group">
+            <label for="alert-type">Alert / Event</label>
+            <select id="alert-type">
+              <optgroup label="Weather">
+                <option value="TOR">Tornado Warning (TOR)</option>
+                <option value="TOA">Tornado Watch (TOA)</option>
+                <option value="SVR">Severe Thunderstorm Warning (SVR)</option>
+                <option value="FFW">Flash Flood Warning (FFW)</option>
+                <option value="WSW">Winter Storm Warning (WSW)</option>
+                <option value="HUW">Hurricane Warning (HUW)</option>
+                <option value="SVA">Severe Thunderstorm Watch (SVA)</option>
+                <option value="SPS">Special Weather Statement (SPS)</option>
+              </optgroup>
+              <optgroup label="School / Campus">
+                <option value="LOCKDOWN">Lockdown</option>
+                <option value="FIRE">Fire / Evacuation</option>
+                <option value="MEDICAL">Medical Emergency</option>
+                <option value="SHELTER">Shelter in Place</option>
+                <option value="EVAC">Evacuation</option>
+                <option value="ALLCLEAR">All Clear</option>
+                <option value="CEM">Civil Emergency Message</option>
+              </optgroup>
+              <optgroup label="System">
+                <option value="RWT">Required Weekly Test / System Test</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="voice-select">TTS Voice</label>
+            <select id="voice-select">
+              <option value="paul" selected>Paul (Original CRS)</option>
+              <option value="tom">Tom (Improved)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="custom-note">Optional Note (shown on screen)</label>
+            <input type="text" id="custom-note" placeholder="e.g. Move to interior rooms immediately" maxlength="120" />
+          </div>
+
+          <button id="send-btn" class="btn-danger btn-large">
+            🚨 SEND ALERT
+          </button>
+
+          <p class="hint">Alert will play the matching pre-recorded TTS file on all open receiver tabs.</p>
+        </section>
+
+        <section class="panel log-panel">
+          <h2>Recent Alerts</h2>
+          <ul id="alert-log" class="alert-log">
+            <li class="empty">No alerts sent yet</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

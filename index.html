@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KPSEAS Wilkes Emergency Alerting System</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="landing">
+  <div class="container">
+    <header>
+      <div class="logo">KPSEAS</div>
+      <h1>Wilkes Emergency Alerting System</h1>
+      <p class="subtitle">Campus Crisis Alert Prototype</p>
+    </header>
+
+    <main class="role-select">
+      <h2>Select Role</h2>
+
+      <div class="role-cards">
+        <a href="admin.html" class="role-card admin">
+          <div class="icon">🔐</div>
+          <h3>Front Office / Admin</h3>
+          <p>Send emergency alerts<br><small>Requires PIN</small></p>
+        </a>
+
+        <a href="receiver.html?role=teacher" class="role-card teacher">
+          <div class="icon">👩‍🏫</div>
+          <h3>Teacher</h3>
+          <p>Automatic receiver<br><small>Classroom view</small></p>
+        </a>
+
+        <a href="receiver.html?role=student" class="role-card student">
+          <div class="icon">🎓</div>
+          <h3>Student</h3>
+          <p>Automatic receiver<br><small>Student device</small></p>
+        </a>
+      </div>
+    </main>
+
+    <footer>
+      <p>Prototype only • Does not control real PA, computers, or beacons</p>
+    </footer>
+  </div>
+</body>
+</html>
